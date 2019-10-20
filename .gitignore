@@ -1,0 +1,5 @@
+.stack-work/
+cs4410.cabal
+*~
+.DS_Store
+build

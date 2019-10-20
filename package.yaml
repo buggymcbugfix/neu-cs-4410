@@ -1,0 +1,63 @@
+name:                cs4410
+version:             0.1.0.0
+github:              "buggymcbugfix/cs4410"
+license:             BSD3
+author:              "Vilem-Benjamin Liepelt"
+maintainer:          "v.liepelt@kent.ac.uk"
+copyright:           "(c) Vilem-Benjamin Liepelt"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/buggymcbugfix/cs4410#readme>
+
+default-extensions:
+- OverloadedStrings
+- TypeApplications
+
+dependencies:
+- base >= 4.7 && < 5
+- text
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+
+
+library:
+  source-dirs: src
+
+executables:
+  cs4410-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - cs4410
+
+tests:
+  cs4410-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - cs4410
