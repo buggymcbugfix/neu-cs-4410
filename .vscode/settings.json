@@ -1,3 +1,4 @@
 {
-  "hic.executablePath": "/Users/vl200/.stack/compiler-tools/x86_64-osx/ghc-8.6.5/bin/ghcide"
+  "hic.executablePath": "/Users/vl200/.stack/compiler-tools/x86_64-osx/ghc-8.6.5/bin/ghcide",
+  "editor.formatOnSave": true
 }

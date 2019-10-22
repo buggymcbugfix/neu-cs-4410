@@ -1,9 +1,10 @@
 module Compiler
-  ( compile
-  ) where
+  ( compile,
+  )
+where
 
-import MyPrelude
 import Expr
+import MyPrelude
 
 data Register
   = RAX
@@ -29,16 +30,17 @@ instance Pretty Instruction where
     Mov r a -> "mov" <+> pretty r <> "," <+> pretty a
 
 compile :: Expr Int -> Text
-compile n = renderStrict . layoutPretty opts . vsep $
-    [ "section .text"
-    , "global our_code_starts_here"
-    , "our_code_starts_here:"
-    , pp n
-    , "\tret"
+compile n =
+  renderStrict . layoutPretty opts . vsep $
+    [ "section .text",
+      "global our_code_starts_here",
+      "our_code_starts_here:",
+      pp n,
+      "\tret"
     ]
   where
     pp = vsep . map (("\t" <>) . pretty) . compileExpr
-    opts = LayoutOptions{ layoutPageWidth = Unbounded }
+    opts = LayoutOptions {layoutPageWidth = Unbounded}
 
 compileExpr :: Expr Int -> List Instruction
 compileExpr (EInt n) = [Mov RAX (Imm n)]

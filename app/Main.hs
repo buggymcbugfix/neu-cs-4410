@@ -1,12 +1,12 @@
+{-# LANGUAGE TypeApplications #-}
+
 module Main where
 
-import Prelude hiding (putStrLn)
-
-import System.Environment (getArgs)
-import Data.Text.IO (putStrLn)
-
 import Compiler
+import Data.Text.IO (putStrLn)
 import Expr
+import System.Environment (getArgs)
+import Prelude hiding (putStrLn)
 
 main :: IO ()
 main = do
