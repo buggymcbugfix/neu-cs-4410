@@ -23,6 +23,7 @@ default-extensions:
 - OverloadedStrings
 - TypeApplications
 - LambdaCase
+- GADTs
 
 dependencies:
 - base >= 4.7 && < 5

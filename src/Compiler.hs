@@ -3,22 +3,7 @@ module Compiler
   ) where
 
 import MyPrelude
-
-import Data.Text (Text)
--- import qualified Data.Text as Text
-import Data.Text.Prettyprint.Doc
-  ( (<+>),
-    LayoutOptions (LayoutOptions),
-    Pretty (pretty, prettyList),
-    PageWidth (Unbounded),
-    layoutPageWidth,
-    layoutPretty,
-    indent,
-    vsep,
-  )
-import Data.Text.Prettyprint.Doc.Render.Text (renderStrict)
-
-type Expr = Int
+import Expr
 
 data Register
   = RAX
@@ -43,19 +28,17 @@ instance Pretty Instruction where
   pretty = \case
     Mov r a -> "mov" <+> pretty r <> "," <+> pretty a
 
-  prettyList = vsep . map pretty
-
-compile :: Expr -> Text
+compile :: Expr Int -> Text
 compile n = renderStrict . layoutPretty opts . vsep $
     [ "section .text"
     , "global our_code_starts_here"
     , "our_code_starts_here:"
     , pp n
-    , "  ret"
+    , "\tret"
     ]
   where
-    pp = indent 2 . prettyList . compileExpr
+    pp = vsep . map (("\t" <>) . pretty) . compileExpr
     opts = LayoutOptions{ layoutPageWidth = Unbounded }
 
-compileExpr :: Expr -> List Instruction
-compileExpr n = [Mov RAX (Imm n)]
+compileExpr :: Expr Int -> List Instruction
+compileExpr (EInt n) = [Mov RAX (Imm n)]
